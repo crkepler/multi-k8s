@@ -1,7 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 .idea
 ../.idea
-/build
 
 # dependencies
 /node_modules
@@ -40,3 +39,6 @@ crash.*.log
 .terraformrc
 terraform.rc
 .terraform.lock.hcl
+#GCP key. Run command to get a new one:
+#gcloud iam service-accounts keys create terraform-gke-keyfile.json --iam-account=<service-account>@<project-id>.iam.gserviceaccount.com
+terraform-gke-keyfile.json
