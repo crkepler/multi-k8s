@@ -17,7 +17,7 @@ before_install:
  - gcloud auth activate-service-account --key-file service-account.json
  - gcloud config set project k8s-learning-359216
  - gcloud config set compute/region us-east1
- - gcloud container clusters get-credentials gke-cluster
+ - gcloud container clusters get-credentials gke-cluster --zone=us-east1 --project=k8s-learning-359216
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
  - docker build -t crkepler/react-test -f ./client/Dockerfile.dev ./client
 
