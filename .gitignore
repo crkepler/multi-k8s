@@ -42,5 +42,4 @@ terraform.rc
 #GCP key. Run command to get a new one:
 #gcloud iam service-accounts keys create terraform-gke-keyfile.json --iam-account=<service-account>@<project-id>.iam.gserviceaccount.com
 service-account.json
-service-account.json.enc
 /terraform/terraform-gke-keyfile.json
