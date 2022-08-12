@@ -1,6 +1,10 @@
 sudo: required
 services:
  - docker
+env:
+ global:
+  - SHA=$(git rev-parse HEAD) #gets the SHA from last commit. See algo git logs
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
 #install the Google SDK. Need to do it every time...
 before_install:
@@ -11,4 +15,17 @@ before_install:
  #install kubectl
  - gcloud components update kubectl
  - gcloud auth activate-service-account --key-file service-account.json
+ - gcloud config set project k8s-learning-359216
+ - gcloud config set compute/zone ""
+ - gcloud container clusters get-credentials gke-cluster
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+ - docker build -t crkepler/react-test -f ./client/Dockerfile.dev ./client
 
+script:
+ - docker run -e CI=true crkepler/react-test npm test
+
+deploy:
+ provider: script
+ script: bash ./deploy.sh
+ on:
+  branch: main

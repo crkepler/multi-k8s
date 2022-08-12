@@ -19,6 +19,11 @@ variable "zones" {
   description = "The zones to host the cluster in."
 }
 
+variable "node_locations" {
+  type        = string
+  description = "The zones for the nodes to run in"
+}
+
 variable "name" {
   type        = string
   description = "The name of the cluster."

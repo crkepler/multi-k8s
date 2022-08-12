@@ -26,7 +26,7 @@ module "gke" {
     {
       name                      = "default-node-pool"
       machine_type              = var.machine_type
-      node_locations            = var.zones /*"us-central1-b,us-central1-c"*/
+      node_locations            = var.node_locations
       min_count                 = var.min_count
       max_count                 = var.max_count
       local_ssd_count           = 0
