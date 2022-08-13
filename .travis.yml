@@ -13,7 +13,6 @@ before_install:
  - chmod 700 get_helm.sh
  - ./get_helm.sh
  - helm version
- - helm init --client-only
  #end RK Test
  - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
  #after downloading with curl, use bash for the installation
