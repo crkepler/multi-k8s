@@ -20,9 +20,15 @@ before_install:
  - gcloud container clusters get-credentials gke-cluster
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
  - docker build -t crkepler/react-test -f ./client/Dockerfile.dev ./client
+ #RK TEST
+ - curl -L https://git.io/get_helm.sh | bash
+ - helm init --client-only
 
 script:
  - docker run -e CI=true crkepler/react-test npm test
+ # RK Test
+ - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+ - helm install my-release ingress-nginx/ingress-nginx
 
 deploy:
  provider: script
