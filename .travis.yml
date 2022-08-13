@@ -21,7 +21,8 @@ before_install:
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
  - docker build -t crkepler/react-test -f ./client/Dockerfile.dev ./client
  #RK TEST
- - curl -L https://git.io/get_helm.sh | bash
+ - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+ - helm version
  - helm init --client-only
 
 script:
