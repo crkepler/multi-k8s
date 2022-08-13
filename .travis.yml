@@ -8,17 +8,12 @@ env:
 
 #install the Google SDK. Need to do it every time...
 before_install:
- #RK TEST
- - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
- - chmod 700 get_helm.sh
- - ./get_helm.sh
- - helm version
- #end RK Test
  - openssl aes-256-cbc -K $encrypted_9f3b5599b056_key -iv $encrypted_9f3b5599b056_iv -in service-account.json.enc -out service-account.json -d
- #after downloading with curl, use bash for the installation
+   #install Google Cloud SDK
+   #after downloading with curl, use bash for the installation
  - curl https://sdk.cloud.google.com | bash > /dev/null;
  - source $HOME/google-cloud-sdk/path.bash.inc
- #install kubectl
+   #install kubectl
  - gcloud components update kubectl
  - gcloud auth activate-service-account --key-file service-account.json
  - gcloud config set project k8s-learning-359216
@@ -26,13 +21,14 @@ before_install:
  - gcloud container clusters get-credentials gke-cluster
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
  - docker build -t crkepler/react-test -f ./client/Dockerfile.dev ./client
-
+   #install Helm
+ - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+ - chmod 700 get_helm.sh
+ - ./get_helm.sh
+ - helm version
 
 script:
  - docker run -e CI=true crkepler/react-test npm test
- # RK Test
- - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
- - helm install my-release ingress-nginx/ingress-nginx
 
 deploy:
  provider: script

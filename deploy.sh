@@ -1,3 +1,7 @@
+#add the ingress ngix pod
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+
 #notice the two tags:
 docker build -t crkepler/multi-client-k8s:latest -t crkepler/multi-client-k8s:$SHA -f ./client/Dockerfile ./client
 docker build -t crkepler/multi-server-k8s-pgfix:latest -t crkepler/multi-server-k8s-pgfix:$SHA -f ./server/Dockerfile ./server
